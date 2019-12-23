@@ -5,9 +5,119 @@
   </head>
   <body>
     <script>
-        function computerPlay () {
-            
+      let win = 0;
+      let loss = 0;
+      let repeat = false;
+      let valid;
+      let round = 1;
+
+      function getRandomInt() {
+        return Math.floor(Math.random() * Math.floor(3));
+      }
+
+      function computerPlay() {
+        let computerSelection = getRandomInt();
+        switch (computerSelection) {
+          case 0:
+            return "Rock";
+            break;
+          case 1:
+            return "Paper";
+            break;
+          case 2:
+            return "Scissors";
         }
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        if (playerSelection == "Rock" && computerSelection == "Scissors") {
+          repeat = false;
+          return "win";
+        } else if (playerSelection == "Rock" && computerSelection == "Paper") {
+          repeat = false;
+          return "loss";
+        } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+          repeat = false;
+          return "win";
+        } else if (
+          playerSelection == "Paper" &&
+          computerSelection == "Scissors"
+        ) {
+          repeat = false;
+          return "loss";
+        } else if (
+          playerSelection == "Scissors" &&
+          computerSelection == "Paper"
+        ) {
+          repeat = false;
+          return "win";
+        } else if (
+          playerSelection == "Scissors" &&
+          computerSelection == "Rock"
+        ) {
+          repeat = false;
+          return "loss";
+        } else if (playerSelection == computerSelection) {
+          repeat = true;
+        }
+      }
+      function checkValidity(playerSelection) {
+        if (
+          playerSelection == "Rock" ||
+          playerSelection == "Paper" ||
+          playerSelection == "Scissors"
+        ) {
+          return true;
+        } else {
+          return false;
+          let playerSelection = prompt("Please enter a valid choice");
+          playerSelection = playerSelection =
+            playerSelection.charAt(0).toUpperCase() +
+            playerSelection.slice(1, playerSelection.length).toLowerCase();
+        }
+      }
+
+      function game() {
+        while (round < 6) {
+          let computerSelection = computerPlay();
+          let playerSelection = prompt("Enter your selection");
+          playerSelection = playerSelection =
+            playerSelection.charAt(0).toUpperCase() +
+            playerSelection.slice(1, playerSelection.length).toLowerCase();
+          if (checkValidity(playerSelection)) {
+            let results = playRound(playerSelection, computerSelection);
+            while (repeat) {
+              computerSelection = computerPlay();
+              playerSelection = prompt("Enter your selection, you tied");
+              playerSelection =
+                playerSelection.charAt(0).toUpperCase() +
+                playerSelection.slice(1, playerSelection.length).toLowerCase();
+              results = playRound(playerSelection, computerSelection);
+            }
+            console.log("Round " + round);
+            round++;
+            switch (results) {
+              case "win":
+                console.log(
+                  "You Win! " + playerSelection + " beats " + computerSelection
+                );
+                win++;
+                break;
+
+              case "loss":
+                console.log(
+                  "You Lose! " + computerSelection + " beats " + playerSelection
+                );
+                loss++;
+                break;
+            }
+          }
+        }
+        console.log(
+          "You won " + win + " time(s) and lost " + loss + " time(s)."
+        );
+      }
+      game();
     </script>
   </body>
 </html>
