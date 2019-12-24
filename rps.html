@@ -11,10 +11,12 @@
       let valid;
       let round = 1;
 
+      //returns a random number betweeen 0 - 2
       function getRandomInt() {
         return Math.floor(Math.random() * Math.floor(3));
       }
 
+      //takes the random number and returns one of three choices for the computer
       function computerPlay() {
         let computerSelection = getRandomInt();
         switch (computerSelection) {
@@ -29,6 +31,9 @@
         }
       }
 
+      //compares choices of player and computer
+      //returns win, loss, or tie
+      //sets repeat to true if there was a draw otherwise set to false
       function playRound(playerSelection, computerSelection) {
         if (playerSelection == "Rock" && computerSelection == "Scissors") {
           repeat = false;
@@ -61,6 +66,9 @@
           repeat = true;
         }
       }
+
+      //checks if the choice entered by the player is one of three valid choices
+      //if the choice is valid returns true else returns false and asks user to enter a valid choice
       function checkValidity(playerSelection) {
         if (
           playerSelection == "Rock" ||
@@ -70,32 +78,41 @@
           return true;
         } else {
           return false;
-          let playerSelection = prompt("Please enter a valid choice");
-          playerSelection = playerSelection =
+          let playerSelection = prompt("Not a valid choice, please try again");
+          //capitilizes the first letter and and makes the rest lowercase
+          playerSelection =
             playerSelection.charAt(0).toUpperCase() +
             playerSelection.slice(1, playerSelection.length).toLowerCase();
         }
       }
 
       function game() {
+        //loops until five valid games have been played
         while (round < 6) {
           let computerSelection = computerPlay();
-          let playerSelection = prompt("Enter your selection");
-          playerSelection = playerSelection =
+          let playerSelection = prompt("Enter your choice");
+          //capitilizes the first letter and and makes the rest lowercase
+          playerSelection =
             playerSelection.charAt(0).toUpperCase() +
             playerSelection.slice(1, playerSelection.length).toLowerCase();
+          //if the choice the the player is valid it will call the play round function
           if (checkValidity(playerSelection)) {
             let results = playRound(playerSelection, computerSelection);
+            //while loop in case there was a tie
+            //it repeats the round until there is a winner
             while (repeat) {
               computerSelection = computerPlay();
-              playerSelection = prompt("Enter your selection, you tied");
+              playerSelection = prompt("You tied, try again");
+              //capitilizes the first letter and and makes the rest lowercase
               playerSelection =
                 playerSelection.charAt(0).toUpperCase() +
                 playerSelection.slice(1, playerSelection.length).toLowerCase();
               results = playRound(playerSelection, computerSelection);
             }
+
             console.log("Round " + round);
             round++;
+
             switch (results) {
               case "win":
                 console.log(
@@ -113,6 +130,13 @@
             }
           }
         }
+
+        if (win > loss) {
+          console.log("You won!");
+        } else {
+          console.log("You lost");
+        }
+
         console.log(
           "You won " + win + " time(s) and lost " + loss + " time(s)."
         );
