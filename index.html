@@ -7,140 +7,123 @@
     <script>
       let win = 0;
       let loss = 0;
-      let repeat = false;
-      let valid;
-      let round = 1;
+      let draw = 0;
+      let round = 0;
+      let totalRounds = 5;
 
-      //returns a random number betweeen 0 - 2
       function getRandomInt() {
         return Math.floor(Math.random() * Math.floor(3));
       }
 
-      //takes the random number and returns one of three choices for the computer
       function computerPlay() {
-        let computerSelection = getRandomInt();
-        switch (computerSelection) {
+        let randomChoice = getRandomInt();
+        switch (randomChoice) {
           case 0:
-            return "Rock";
+            return "rock";
             break;
           case 1:
-            return "Paper";
+            return "paper";
             break;
           case 2:
-            return "Scissors";
+            return "scissors";
         }
       }
 
-      //compares choices of player and computer
-      //returns win, loss, or tie
-      //sets repeat to true if there was a draw otherwise set to false
       function playRound(playerSelection, computerSelection) {
-        if (playerSelection == "Rock" && computerSelection == "Scissors") {
-          repeat = false;
-          return "win";
-        } else if (playerSelection == "Rock" && computerSelection == "Paper") {
-          repeat = false;
-          return "loss";
-        } else if (playerSelection == "Paper" && computerSelection == "Rock") {
-          repeat = false;
-          return "win";
-        } else if (
-          playerSelection == "Paper" &&
-          computerSelection == "Scissors"
-        ) {
-          repeat = false;
-          return "loss";
-        } else if (
-          playerSelection == "Scissors" &&
-          computerSelection == "Paper"
-        ) {
-          repeat = false;
-          return "win";
-        } else if (
-          playerSelection == "Scissors" &&
-          computerSelection == "Rock"
-        ) {
-          repeat = false;
-          return "loss";
-        } else if (playerSelection == computerSelection) {
-          repeat = true;
+        switch (true) {
+          case playerSelection === "rock" && computerSelection === "scissors":
+            return "win";
+          case playerSelection === "rock" && computerSelection === "paper":
+            return "loss";
+          case playerSelection === "paper" && computerSelection === "rock":
+            return "win";
+          case playerSelection === "paper" && computerSelection === "scissors":
+            return "loss";
+          case playerSelection === "scissors" && computerSelection === "paper":
+            return "win";
+          case playerSelection === "scissors" && computerSelection === "rock":
+            return "loss";
+          case playerSelection === computerSelection:
+            return "draw";
         }
       }
 
-      //checks if the choice entered by the player is one of three valid choices
-      //if the choice is valid returns true else returns false and asks user to enter a valid choice
       function checkValidity(playerSelection) {
         if (
-          playerSelection == "Rock" ||
-          playerSelection == "Paper" ||
-          playerSelection == "Scissors"
+          playerSelection === "rock" ||
+          playerSelection === "paper" ||
+          playerSelection === "scissors"
         ) {
           return true;
         } else {
           return false;
-          let playerSelection = prompt("Not a valid choice, please try again");
-          //capitilizes the first letter and and makes the rest lowercase
-          playerSelection =
-            playerSelection.charAt(0).toUpperCase() +
-            playerSelection.slice(1, playerSelection.length).toLowerCase();
+          playerSelection = prompt("not a valid choice, please type again");
+          playerSelection = playerSelection.toLowerCase();
+        }
+      }
+
+      function getOverallWinner(win, loss, draw) {
+        switch (true) {
+          case (win > loss):
+            console.log("you won!");
+            break;
+          case (loss > win):
+            console.log("you lost!");
+            break;
+        }
+      }
+
+      function getRoundWinner(results, playerSelection, computerSelection) {
+        switch (results) {
+          case "win":
+            console.log(
+              "you win! " + playerSelection + " beats " + computerSelection
+            );
+            win++;
+            break;
+          case "loss":
+            console.log(
+              "you lose! " + computerSelection + " beats " + playerSelection
+            );
+            loss++;
+            break;
+          case "draw":
+            console.log(
+              "you tied! " + computerSelection + " and " + playerSelection
+            );
+            draw++;
+            break;
         }
       }
 
       function game() {
-        //loops until five valid games have been played
-        while (round < 6) {
+        while (round < totalRounds) {
           let computerSelection = computerPlay();
-          let playerSelection = prompt("Enter your choice");
-          //capitilizes the first letter and and makes the rest lowercase
-          playerSelection =
-            playerSelection.charAt(0).toUpperCase() +
-            playerSelection.slice(1, playerSelection.length).toLowerCase();
-          //if the choice the the player is valid it will call the play round function
+
+          let playerSelection = prompt("enter your choice");
+          playerSelection = playerSelection.toLowerCase();
+
           if (checkValidity(playerSelection)) {
             let results = playRound(playerSelection, computerSelection);
-            //while loop in case there was a tie
-            //it repeats the round until there is a winner
-            while (repeat) {
-              computerSelection = computerPlay();
-              playerSelection = prompt("You tied, try again");
-              //capitilizes the first letter and and makes the rest lowercase
-              playerSelection =
-                playerSelection.charAt(0).toUpperCase() +
-                playerSelection.slice(1, playerSelection.length).toLowerCase();
-              results = playRound(playerSelection, computerSelection);
-            }
-
-            console.log("Round " + round);
+            console.log(`round ${round + 1}`);
+            getRoundWinner(results, playerSelection, computerSelection);
             round++;
-
-            switch (results) {
-              case "win":
-                console.log(
-                  "You Win! " + playerSelection + " beats " + computerSelection
-                );
-                win++;
-                break;
-
-              case "loss":
-                console.log(
-                  "You Lose! " + computerSelection + " beats " + playerSelection
-                );
-                loss++;
-                break;
-            }
           }
         }
 
-        if (win > loss) {
-          console.log("You won!");
-        } else {
-          console.log("You lost");
-        }
+        getOverallWinner(win, loss, draw);
 
         console.log(
-          "You won " + win + " time(s) and lost " + loss + " time(s)."
+          "you won " +
+            win +
+            " time(s), lost " +
+            loss +
+            " time(s), and tied " +
+            draw +
+            " time(s)"
         );
       }
+
       game();
     </script>
   </body>
