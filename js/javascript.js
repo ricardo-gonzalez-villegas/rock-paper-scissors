@@ -64,13 +64,13 @@ function getRoundWinner(results, playerSelection, computerSelection) {
       computerWon.classList.remove('win');
       playerWon.classList.add('win'); 
       computerWon.classList.add('lose');
-      player_score.src=`/img/${playerWin}.png`;
+      player_score.src=`./img/${playerWin}.png`;
 
       //playerWon.classList.add('win');
       break;
     case "loss":
       computerWin++;
-      computer_score.src=`/img/${computerWin}.png`;
+      computer_score.src=`./img/${computerWin}.png`;
       playerWon.classList.remove('draw'); 
       computerWon.classList.remove('draw');
       playerWon.classList.remove('win'); 
@@ -94,7 +94,7 @@ function game(player) {
   if (playerWin != 6 && computerWin != 6) {
     let computerSelection = computerPlay();
     playerSelection = player;
-    computer_choice.src=`/img/${computerSelection}.png`;
+    computer_choice.src=`./img/${computerSelection}.png`;
     
    
     
@@ -123,6 +123,6 @@ const computer_score = document.querySelector("#computer_score");
 btn.forEach(btn => {
   btn.addEventListener("click", function(e) {
     game(btn.id);
-    player_choice.src=`/img/${btn.id}.png`;
+    player_choice.src=`./img/${btn.id}.png`;
   });
 });
