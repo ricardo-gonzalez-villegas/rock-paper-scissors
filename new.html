@@ -2,39 +2,37 @@
 <html>
   <head>
     <title>Rock Paper Scissors</title>
-    <link rel="stylesheet" href="css/css.css" type ="text/css">
-    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/css/css.css" type="text/css" />
+    <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+    <script type="text/javascript" src="js/javascript.js" defer></script>
   </head>
   <body>
     <div id="wrapper">
       <div class="container" id="player">
-        <div class="score"></div>
+        <div class="score">
+          <img id="player_score" src="/img/0.png" />
+        </div>
+        <div id="player_container" class="choice">
+          <img id="player_choice" src="/img/janken_gu.png" />
+        </div>
         <div class="playfield">
-          <div class="choice">
-            <button>Rock</button>
+          <div class="button-container">
+            <button id="paper">Paper</button>
           </div>
-          <div class="choice">
-            <button>Paper</button>
+          <div class="button-container">
+            <button id="rock">Rock</button>
           </div>
-          <div class="choice">
-            <button>Scissors</button>
+          <div class="button-container">
+            <button id="scissors">Scissors</button>
           </div>
         </div>
-        <!-- make only one choice box and have 3 divs for each of the buttons place a button container only dis
-        display one image when you click on your choice and then have a transform 1.1 scale function after click plus update score and show the previous choice -->
       </div>
       <div class="container" id="computer">
-        <div class="score"></div>
-        <div class="playfield">
-          <div class="choice">
-            <button>Rock</button>
-          </div>
-          <div class="choice">
-            <button>Paper</button>
-          </div>
-          <div class="choice">
-            <button>Scissors</button>
-          </div>
+        <div class="score">
+          <img id="computer_score" src="/img/0.png" />
+        </div>
+        <div id="computer_container" class="choice">
+          <img id="computer_choice" src="/img/janken_gu.png" />
         </div>
       </div>
     </div>

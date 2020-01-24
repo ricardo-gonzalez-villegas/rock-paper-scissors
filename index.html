@@ -2,129 +2,39 @@
 <html>
   <head>
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css" />
+    <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+    <script type="text/javascript" src="js/javascript.js" defer></script>
   </head>
   <body>
-    <script>
-      let win = 0;
-      let loss = 0;
-      let draw = 0;
-      let round = 0;
-      let totalRounds = 5;
-
-      function getRandomInt() {
-        return Math.floor(Math.random() * Math.floor(3));
-      }
-
-      function computerPlay() {
-        let randomChoice = getRandomInt();
-        switch (randomChoice) {
-          case 0:
-            return "rock";
-            break;
-          case 1:
-            return "paper";
-            break;
-          case 2:
-            return "scissors";
-        }
-      }
-
-      function playRound(playerSelection, computerSelection) {
-        switch (true) {
-          case playerSelection === "rock" && computerSelection === "scissors":
-            return "win";
-          case playerSelection === "rock" && computerSelection === "paper":
-            return "loss";
-          case playerSelection === "paper" && computerSelection === "rock":
-            return "win";
-          case playerSelection === "paper" && computerSelection === "scissors":
-            return "loss";
-          case playerSelection === "scissors" && computerSelection === "paper":
-            return "win";
-          case playerSelection === "scissors" && computerSelection === "rock":
-            return "loss";
-          case playerSelection === computerSelection:
-            return "draw";
-        }
-      }
-
-      function checkValidity(playerSelection) {
-        if (
-          playerSelection === "rock" ||
-          playerSelection === "paper" ||
-          playerSelection === "scissors"
-        ) {
-          return true;
-        } else {
-          return false;
-          playerSelection = prompt("not a valid choice, please type again");
-          playerSelection = playerSelection.toLowerCase();
-        }
-      }
-
-      function getOverallWinner(win, loss, draw) {
-        switch (true) {
-          case (win > loss):
-            console.log("you won!");
-            break;
-          case (loss > win):
-            console.log("you lost!");
-            break;
-        }
-      }
-
-      function getRoundWinner(results, playerSelection, computerSelection) {
-        switch (results) {
-          case "win":
-            console.log(
-              "you win! " + playerSelection + " beats " + computerSelection
-            );
-            win++;
-            break;
-          case "loss":
-            console.log(
-              "you lose! " + computerSelection + " beats " + playerSelection
-            );
-            loss++;
-            break;
-          case "draw":
-            console.log(
-              "you tied! " + computerSelection + " and " + playerSelection
-            );
-            draw++;
-            break;
-        }
-      }
-
-      function game() {
-        while (round < totalRounds) {
-          let computerSelection = computerPlay();
-
-          let playerSelection = prompt("enter your choice");
-          playerSelection = playerSelection.toLowerCase();
-
-          if (checkValidity(playerSelection)) {
-            let results = playRound(playerSelection, computerSelection);
-            console.log(`round ${round + 1}`);
-            getRoundWinner(results, playerSelection, computerSelection);
-            round++;
-          }
-        }
-
-        getOverallWinner(win, loss, draw);
-
-        console.log(
-          "you won " +
-            win +
-            " time(s), lost " +
-            loss +
-            " time(s), and tied " +
-            draw +
-            " time(s)"
-        );
-      }
-
-      game();
-    </script>
+    <div id="wrapper">
+      <div class="container" id="player">
+        <div class="score">
+          <img id="player_score" src="/img/0.png" />
+        </div>
+        <div id="player_container" class="choice">
+          <img id="player_choice" src="/img/janken_gu.png" />
+        </div>
+        <div class="playfield">
+          <div class="button-container">
+            <button id="paper">Paper</button>
+          </div>
+          <div class="button-container">
+            <button id="rock">Rock</button>
+          </div>
+          <div class="button-container">
+            <button id="scissors">Scissors</button>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="computer">
+        <div class="score">
+          <img id="computer_score" src="/img/0.png" />
+        </div>
+        <div id="computer_container" class="choice">
+          <img id="computer_choice" src="/img/janken_gu.png" />
+        </div>
+      </div>
+    </div>
   </body>
 </html>

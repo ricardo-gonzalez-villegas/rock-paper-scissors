@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
 }
@@ -6,8 +7,6 @@ html, body {
 #wrapper {
     width: 100%;
     height: 100%;
-    background-color: aqua;
-    
 }
 
 .container {
@@ -16,40 +15,86 @@ html, body {
 }
 
 #player {
-    background-color: blueviolet;
     float: left;
 }
 
 #computer {
-    background-color: crimson;
     float: right;
 }
 
 .score {
-    height: 14em;
-    width: 14em;
+    height: 180px;
+    width: 180px;
     margin: 0 auto;
     background-color: white;
+    position: relative;
+    top: 110px;
+
 }
 
-.playfield{
+.score img {
+    height: 100%;
+    width: 100%;
+    border: 4px solid black;
+
+}
+
+.playfield {
     height: 100px;
     width: 300px;
-    background-color: orange;
     margin: 0 auto;
     position: relative;
-    justify-content: center;
-    top: 20em;
+    top: 170px;
 }
 
 .choice {
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    background-color: chartreuse;
+    margin: 0 auto;
+    position: relative;
+    top: 140px;
+    border: 4px solid black;
+
+}
+
+.choice img {
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    position: relative;
+    top: 15%;
+    left: 15%;
+}
+
+.button-container {
     width: 33%;
-    height: 20px;
+    height: 100%;
+    position: relative;
     float: left;
+    font-size: 1.3em;
 }
 
 button {
-    height:20px; 
-    width:100px; 
-   
+    height: 90px;
+    width: 90px;
+    position: relative;
+    left: 6px;
+    top: 5px;
+}
+
+.win {  
+    border: 4px solid green;
+    box-shadow: 0 0 1rem green;
+}
+
+.lose {  
+    border: 4px solid red;
+    box-shadow: 0 0 1rem red;
+}
+
+.draw {
+    border: 4px solid yellow;
+    box-shadow: 0 0 1rem yellow;
 }
