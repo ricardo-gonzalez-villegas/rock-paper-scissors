@@ -1,8 +1,17 @@
-let win = 0;
-let playerWin = 0;
-let computerWin = 0;
-let loss = 0;
-let draw = 0;
+const btn = document.querySelectorAll("button");
+const choice = document.querySelectorAll(".choice");
+const player_choice = document.querySelector("#player_choice");
+const player_score = document.querySelector("#player_score");
+const computer_choice = document.querySelector("#computer_choice");
+const computer_score = document.querySelector("#computer_score");
+let playerWins = 0;
+let computerWins = 0;
+
+btn.forEach(btn => {
+  btn.addEventListener("click", function() {
+    game(btn.id);
+  });
+});
 
 function getRandomInt() {
   return Math.floor(Math.random() * Math.floor(3));
@@ -41,88 +50,73 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function getOverallWinner(win, loss, draw) {
+function getOverallWinner() {
   switch (true) {
-    case win > loss:
-      alert("you won!");
+    case playerWins === 5:
+      player_choice.src = "./img/pose_win_boy.png";
+      computer_choice.src = "./img/pose_lose_boy.png";
+      removeButtons();
       break;
-    case loss > win:
-      alert("you lost!");
+    case computerWins === 5:
+      player_choice.src = "./img/pose_lose_boy.png";
+      computer_choice.src = "./img/pose_win_boy.png";
+      removeButtons();
       break;
   }
 }
 
-function getRoundWinner(results, playerSelection, computerSelection) {
-    const computerWon = document.querySelector('#computer_container');
-    const playerWon = document.querySelector('#player_container');
+function getRoundWinner(results) {
+  const computerWon = document.querySelector("#computer_container");
+  const playerWon = document.querySelector("#player_container");
   switch (results) {
     case "win":
-      playerWin++;
-      playerWon.classList.remove('draw'); 
-      computerWon.classList.remove('draw');
-      playerWon.classList.remove('lose'); 
-      computerWon.classList.remove('win');
-      playerWon.classList.add('win'); 
-      computerWon.classList.add('lose');
-      player_score.src=`./img/${playerWin}.png`;
-
-      //playerWon.classList.add('win');
+      playerWins++;
+      player_score.src = `./img/${playerWins}.png`;
+      playerWon.classList.remove("draw");
+      playerWon.classList.add("win");
+      playerWon.classList.remove("lose");
+      computerWon.classList.remove("draw");
+      computerWon.classList.remove("win");
+      computerWon.classList.add("lose");
+      checkIfFinished();
       break;
     case "loss":
-      computerWin++;
-      computer_score.src=`./img/${computerWin}.png`;
-      playerWon.classList.remove('draw'); 
-      computerWon.classList.remove('draw');
-      playerWon.classList.remove('win'); 
-      computerWon.classList.remove('lose');
-      computerWon.classList.add('win');
-      playerWon.classList.add('lose'); 
+      computerWins++;
+      computer_score.src = `./img/${computerWins}.png`;
+      playerWon.classList.remove("win");
+      playerWon.classList.remove("draw");
+      playerWon.classList.add("lose");
+      computerWon.classList.remove("draw");
+      computerWon.classList.remove("lose");
+      computerWon.classList.add("win");
+      checkIfFinished();
       break;
     case "draw":
-      computerWon.classList.add('draw');
-      playerWon.classList.add('draw'); 
-      draw++;
+      playerWon.classList.add("draw");
+      computerWon.classList.add("draw");
+      checkIfFinished();
       break;
+  }
+}
+
+function checkIfFinished() {
+  if (playerWins == 5 || computerWins == 5) {
+    getOverallWinner();
   }
 }
 
 function game(player) {
-    if (playerWin == 5 || computerWin == 5) {
-        document.getElementById("button").disabled = true; 
-    }
-
-  if (playerWin != 6 && computerWin != 6) {
+  if (playerWins != 5 && computerWins != 5) {
     let computerSelection = computerPlay();
     playerSelection = player;
-    computer_choice.src=`./img/${computerSelection}.png`;
-    
-   
-    
-      let results = playRound(playerSelection, computerSelection);
-      getRoundWinner(results, playerSelection, computerSelection);
-    
-  }
 
-  getOverallWinner(win, loss, draw);
+    player_choice.src = `./img/${player}.png`;
+    computer_choice.src = `./img/${computerSelection}.png`;
+
+    getRoundWinner(playRound(playerSelection, computerSelection));
+  }
 }
 
-const btn = document.querySelectorAll("button");
-
-const choice = document.querySelectorAll(".choice");
-
-const player_choice = document.querySelector("#player_choice");
-
-const player_score = document.querySelector("#player_score");
-
-const computer_choice = document.querySelector("#computer_choice");
-
-const computer_score = document.querySelector("#computer_score");
-
-
-
-btn.forEach(btn => {
-  btn.addEventListener("click", function(e) {
-    game(btn.id);
-    player_choice.src=`./img/${btn.id}.png`;
-  });
-});
+function removeButtons() {
+  document.getElementById("buttons").remove();
+}

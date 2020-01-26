@@ -2,6 +2,7 @@ html,
 body {
     width: 100%;
     height: 100%;
+    background-image: url('/img/bg_chiheisen_green.jpg');
 }
 
 #wrapper {
@@ -26,17 +27,13 @@ body {
     height: 180px;
     width: 180px;
     margin: 0 auto;
-    background-color: white;
     position: relative;
-    top: 110px;
-
+    top: 50px;
 }
 
 .score img {
     height: 100%;
     width: 100%;
-    border: 4px solid black;
-
 }
 
 .playfield {
@@ -44,19 +41,17 @@ body {
     width: 300px;
     margin: 0 auto;
     position: relative;
-    top: 170px;
+    top: 160px;
 }
 
 .choice {
     width: 250px;
     height: 250px;
     border-radius: 100%;
-    background-color: chartreuse;
+    background-color: #faf4ca;
     margin: 0 auto;
     position: relative;
-    top: 140px;
-    border: 4px solid black;
-
+    top: 100px;
 }
 
 .choice img {
@@ -84,17 +79,17 @@ button {
     top: 5px;
 }
 
-.win {  
-    border: 4px solid green;
-    box-shadow: 0 0 1rem green;
+.win {
+    border: 2px solid #cbed40;
+    box-shadow: 0 0 2rem #cbed40;
 }
 
-.lose {  
-    border: 4px solid red;
-    box-shadow: 0 0 1rem red;
+.lose {
+    border: 2px solid #fc4f38;
+    box-shadow: 0 0 2rem #fc4f38;
 }
 
 .draw {
-    border: 4px solid yellow;
-    box-shadow: 0 0 1rem yellow;
+    border: 2px solid #f5eb5f;
+    box-shadow: 0 0 2rem #f5eb5f;
 }
