@@ -56,11 +56,13 @@ function getOverallWinner() {
       player_choice.src = "./img/pose_win_boy.png";
       computer_choice.src = "./img/pose_lose_boy.png";
       removeButtons();
+      addReset();
       break;
     case computerWins === 5:
       player_choice.src = "./img/pose_lose_boy.png";
       computer_choice.src = "./img/pose_win_boy.png";
       removeButtons();
+      addReset();
       break;
   }
 }
@@ -119,4 +121,18 @@ function game(player) {
 
 function removeButtons() {
   document.getElementById("buttons").remove();
+}
+
+function addReset() {
+  const container = document.querySelector("#player");
+  const resetContainer = document.createElement("div");
+  resetContainer.classList.add("playfield");
+  container.appendChild(resetContainer);
+  const reset = document.createElement("button");
+  reset.textContent = "Reset";
+  reset.classList.add("button-container");
+  resetContainer.appendChild(reset);
+  reset.addEventListener("click", () => {
+    location.reload();
+  });
 }
